@@ -41,5 +41,5 @@ Thumbs.db
 
 # Particular Files/Directories #
 git/
-git-credential-oskeychain
+git-credential-osxkeychain
 .DS_Store
