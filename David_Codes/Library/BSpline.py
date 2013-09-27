@@ -29,7 +29,7 @@ class Bspline(object):
         Synopsis: returns the derivative of a spline of the given dimension
         about the point x.
         """
-        spline = self.b_spline(x, dim-1)
+        spline = self.b_spline(x, dim-1, False)
         
         y = self.knots
         N = len(y)
@@ -44,7 +44,7 @@ class Bspline(object):
         for j in range(place-i-1, place+1):
             result[j] = (dim/(y[j+i] - y[j]))*spline[j] - (dim/(y[j+i+1] - y[j+1]))*spline[j+1]
     
-        return result
+        return result[place]
     
     
     
@@ -53,7 +53,7 @@ class Bspline(object):
         Synopsis: returns the derivative of a spline of the given dimension
         about the point x.
         """
-        spline = self.b_spline(x, dim+1)
+        spline = self.b_spline(x, dim+1, Scalar = False)
         
         y = self.knots
         N = len(y)
@@ -71,10 +71,12 @@ class Bspline(object):
     
     
     
-    def b_spline(self, x, dim = 3):
+    def b_spline(self, x, dim = 3, scalar = True):
         '''
         x is the value at which to evaluate the spline
         d is the order of the b-spline
+        scalar is a boolean to decide whether to return the values for all the B-splines 
+        	or just the k-th one.
         '''
         y = self.knots
         
@@ -92,7 +94,10 @@ class Bspline(object):
             for j in range(place-i-1, place+1):
                 result[j][i] = ((x - y[j])/(y[j+i] - y[j]))*result[j][i-1] + ((y[j+i+1]-x)/(y[j+i+1] - y[j+1]))*result[j+1][i-1]
     
-        return result[:,dim]
+    	if(scalar): 
+    		return result[place,dim]
+    	else: 
+    		return result[:,dim]
     
     
 
