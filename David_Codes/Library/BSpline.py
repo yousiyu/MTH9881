@@ -53,7 +53,7 @@ class Bspline(object):
         Synopsis: returns the derivative of a spline of the given dimension
         about the point x.
         """
-        spline = self.b_spline(x, dim+1, Scalar = False)
+        spline = self.b_spline(x, dim+1, scalar = False)
         
         y = self.knots
         N = len(y)
@@ -64,7 +64,7 @@ class Bspline(object):
                 place = i
         
         result = 0
-        for j in range(place, place+1+dim):
+        for j in range(place-dim, place+1):
             result += (y[place+dim+1] - y[place])/(dim+1)*spline[j]
     
         return result
