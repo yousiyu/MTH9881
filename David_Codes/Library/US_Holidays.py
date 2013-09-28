@@ -26,7 +26,7 @@ from datetime import *
 
 
 
-def generate_holiday_dates(start_date, end_date):
+def Generate_US_Holidays(start_date, end_date):
     """
     Synopsis: This function creates a list of the US holiday dates for
     the following US holidays between the given start and end dates
@@ -66,6 +66,8 @@ def generate_holiday_dates(start_date, end_date):
     ColumbusDays = rrule(freq = YEARLY, dtstart = start_date, until = end_date, bymonth = 10, byweekday = MO(2))
 
     #Veterans Day (November 11, or first Monday after November 11)
+    #Note: If saturday - Friday is holiday
+    # 	   If sunday - Monday is holiday
     TempVeteransDays = rrule(freq = YEARLY, dtstart = start_date, until = end_date, bymonth = 11, bymonthday = 11)
     VeteransDays = []
     for i in range(end_date.year - start_date.year + 1):
