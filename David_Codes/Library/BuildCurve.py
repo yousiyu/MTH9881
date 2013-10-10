@@ -1,6 +1,6 @@
 import BSpline
 
-def forward_ON_rate(t, ts, knots, rates):
+def forward_ON_rate(t, ts, knots, rates, coeffs):
     basis = BSpline.makeBasis(knots)
     y = basis.basis(t, dim = 3, scalar = False)
     #print y
