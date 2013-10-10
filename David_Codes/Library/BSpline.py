@@ -36,17 +36,17 @@ class SplineBasis(object):
 		result = np.zeros((N,d))
 
 		# find the knot points that x lies between
-		for i in xrange(N-1):
-			if x > y[i] and x <= y[i+1]: 
+		for i in range(N-1):
+			if(x>y[i] and x<=y[i+1]): 
 				result[i][0] = 1
 				place = i
 
 		#iterate over the relevant splines    
-		for i in xrange(1,d):
-			for j in xrange(place-i-1, place+1):
+		for i in range(1,d):
+			for j in range(place-i-1, place+1):
 				result[j][i] = ((x - y[j])/(y[j+i] - y[j]))*result[j][i-1] + ((y[j+i+1]-x)/(y[j+i+1] - y[j+1]))*result[j+1][i-1]
 
-		if scalar: 
+		if(scalar): 
 			return result[place,dim]
 		else: 
 			return result[:,dim]
@@ -65,12 +65,12 @@ class SplineBasis(object):
         result = np.zeros(N)
         
         # find the knot points that x lies between
-        for i in xrange(N-1):
-            if x > y[i] and x <= y[i+1]: 
+        for i in range(N-1):
+            if(x>y[i] and x<=y[i+1]): 
                 place = i
         
         i = dim
-        for j in xrange(place-i-1, place+1):
+        for j in range(place-i-1, place+1):
             result[j] = (dim/(y[j+i] - y[j]))*basis[j] - (dim/(y[j+i+1] - y[j+1]))*basis[j+1]
     
         return result[place]
@@ -87,7 +87,7 @@ class SplineBasis(object):
         N = len(y)
         
         result = 0
-        for j in xrange(k, k+dim+1):
+        for j in range(k, k+dim+1):
             result += basis[j]
         
         result *= (y[k+dim+1] - y[k])/(dim+1)
